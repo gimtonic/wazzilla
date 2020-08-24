@@ -1,0 +1,55 @@
+version: "3"
+services:
+  api-gateway:
+    container_name: wazzilla-api-gateway
+    build: "./api-gateway"
+    depends_on:
+      - users-service
+    environment:
+      - USERS_SERVICE_URI=http://users-service:8101
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api-gateway:/opt/app
+
+  users-service:
+    container_name: wazzilla-users-service
+    build: "./users-service"
+    depends_on:
+      - users-service-db
+    environment:
+      - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+    volumes:
+      - ./users-service:/opt/app
+    ports:
+      - "8101:8101"
+
+  users-service-db:
+    container_name: wazzilla-users-service-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql/mysql-server:5.7.21
+    ports:
+      - 0.0.0.0:8201:3306
+
+  notes-service:
+    container_name: wazzilla-notes-service
+    build: "./notes-service"
+    depends_on:
+      - notes-service-db
+    environment:
+      - DB_URI=mysql://root:password@notes-service-db/db?charset=UTF8
+    ports:
+      - "8100:8100"
+    volumes:
+      - ./notes-service:/opt/app
+
+  notes-service-db:
+    container_name: wazzilla-notes-service-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=db
+    image: mysql/mysql-server:5.7.21
+    ports:
+      - 0.0.0.0:8200:3306
