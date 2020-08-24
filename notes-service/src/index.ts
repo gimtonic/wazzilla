@@ -1,14 +1,12 @@
-import "@babel/polyfill";
-
+import "module-alias/register";
 import bodyParser from "body-parser";
+// @ts-ignore
 import cors from "cors";
-import express from "express";
-
-import accessEnv from "#root/helpers/accessEnv";
+import express, { Request, Response, NextFunction } from "express";
 
 import setupRoutes from "./routes";
 
-const PORT = accessEnv("PORT", 8100);
+const PORT = 8100;
 
 const app = express();
 
@@ -16,7 +14,7 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: (origin, cb) => cb(null, true),
+    origin: (origin: String, cb: CallableFunction) => cb(null, true),
     credentials: true,
     preflightContinue: true,
     exposedHeaders: [
@@ -30,7 +28,7 @@ app.use(
 
 setupRoutes(app);
 
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json({
     message: err.message,
   });

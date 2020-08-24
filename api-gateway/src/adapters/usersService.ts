@@ -1,6 +1,7 @@
 import got from "got";
 
-import accessEnv from "#root/helpers/accessEnv";
+//@ts-ignore
+import accessEnv from "#src/helpers/accessEnv";
 
 const USERS_SERVICE_URI = accessEnv("USERS_SERVICE_URI");
 

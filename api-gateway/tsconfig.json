@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noEmit": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@src": ["./src"]
+    }
+  },
+  "include": ["./src/**/*"]
+}
