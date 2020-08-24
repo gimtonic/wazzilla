@@ -6,7 +6,9 @@
   "scripts": {
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",
-    "watch": "nodemon --exec ts-node src/index.ts"
+    "watch": "nodemon --exec ts-node src/index.ts",
+    "test": "jest --watch",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -19,8 +21,11 @@
   "devDependencies": {
     "@types/express": "^4.17.7",
     "@types/express-serve-static-core": "^4.17.9",
+    "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
+    "jest": "^26.4.2",
     "nodemon": "^2.0.4",
+    "ts-jest": "^26.2.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
