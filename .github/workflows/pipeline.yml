@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone my repo
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
-      - name: Create zip deployment package
-        run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
+      #   - name: Create zip deployment package
+      #     run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.1
