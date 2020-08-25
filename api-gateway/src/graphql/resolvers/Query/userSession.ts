@@ -1,8 +1,8 @@
-// @ts-ignore
-import UsersService from "@src/adapters/usersService";
-
-const userSessionResolver = async () => {
-  return await UsersService.getUsers();
+const userSessionResolver = () => {
+  return {
+    id: 23,
+    email: "safdsaf@adsdsad.ru",
+  };
 };
 
 export default userSessionResolver;
