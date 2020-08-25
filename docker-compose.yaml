@@ -5,11 +5,13 @@ services:
     build: "./api-gateway"
     depends_on:
       - users-service
+      - notes-service
     environment:
-      - USERS_SERVICE_URI=http://users-service:8101
-      - NOTES_SERVICE_URI=http://notes-service:8100
+      USERS_SERVICE_URI: ${USERS_SERVICE_URI}
+      NOTES_SERVICE_URI: ${NOTES_SERVICE_URI}
+      PORT: ${API_GATEWAY_PORT}
     ports:
-      - "8000:8000"
+      - "${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
     volumes:
       - ./api-gateway:/opt/app
 
@@ -19,17 +21,18 @@ services:
     depends_on:
       - users-service-db
     environment:
-      - DB_URI=mysql://root:password@users-service-db/db?charset=UTF8
+      DB_URI: ${USERS_DB_URI}
+      PORT: ${USERS_SERVICE_PORT}
     volumes:
       - ./users-service:/opt/app
     ports:
-      - "8101:8101"
+      - "${USERS_SERVICE_PORT}:${USERS_SERVICE_PORT}"
 
   users-service-db:
     container_name: wazzilla-users-service-db
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     image: mysql/mysql-server:5.7.21
     ports:
       - 0.0.0.0:8201:3306
@@ -40,17 +43,18 @@ services:
     depends_on:
       - notes-service-db
     environment:
-      - DB_URI=mysql://root:password@notes-service-db/db?charset=UTF8
+      DB_URI: ${NOTES_DB_URI}
+      PORT: ${NOTES_SERVICE_PORT}
     ports:
-      - "8100:8100"
+      - "${NOTES_SERVICE_PORT}:${NOTES_SERVICE_PORT}"
     volumes:
       - ./notes-service:/opt/app
 
   notes-service-db:
     container_name: wazzilla-notes-service-db
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     image: mysql/mysql-server:5.7.21
     ports:
       - 0.0.0.0:8200:3306

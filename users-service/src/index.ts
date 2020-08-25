@@ -6,7 +6,7 @@ import express, { Request, Response, NextFunction } from "express";
 
 import setupRoutes from "./routes";
 
-const PORT = 8101;
+const PORT = Number(process.env.PORT);
 
 const app = express();
 

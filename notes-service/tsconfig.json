@@ -12,5 +12,5 @@
       "@controllers": ["./src/controllers"]
     }
   },
-  "include": ["./src/**/*", "jest.config.js"]
+  "include": ["./src/**/*", "jest.config.js", "sequelize.config.js"]
 }

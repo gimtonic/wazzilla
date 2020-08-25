@@ -1,15 +1,10 @@
 import got from "got";
 
-//@ts-ignore
-import accessEnv from "#src/helpers/accessEnv";
-
-const USERS_SERVICE_URI = accessEnv("USERS_SERVICE_URI");
+const { USERS_SERVICE_URI } = process.env;
 
 export default class UsersService {
   static async getUsers() {
-    const body = await got
-      .get(`${USERS_SERVICE_URI}/users`, { json: {} })
-      .json();
+    const body = await got.get(`${USERS_SERVICE_URI}/users`).json();
     return body;
   }
 }

@@ -9,7 +9,7 @@ import typeDefs from "@src/graphql/typeDefs";
 
 import formatGraphQlErrors from "./formatGraphQLErrors";
 
-const PORT = 8000;
+const PORT = Number(process.env.PORT);
 
 const apolloServer = new ApolloServer({
   context: (a) => a,

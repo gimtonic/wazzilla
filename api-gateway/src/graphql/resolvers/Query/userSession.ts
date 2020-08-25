@@ -1,9 +1,8 @@
-const userSessionResolver = async (obj: any, args: any, context: any) => {
-  return {
-    id: 1,
-    createdAt: "2020-02-12",
-    expiresAt: "2020-02-12",
-  };
+// @ts-ignore
+import UsersService from "@src/adapters/usersService";
+
+const userSessionResolver = async () => {
+  return await UsersService.getUsers();
 };
 
 export default userSessionResolver;
