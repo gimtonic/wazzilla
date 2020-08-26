@@ -1,8 +1,15 @@
 import { DataTypes, Model } from "sequelize";
-
 import sequelize from "./connection";
 
-export class Note extends Model {}
+export default class Note extends Model {
+  public id!: Number;
+  public userId!: Number;
+  public desc!: String;
+  public hashLink?: String;
+  public createdAt!: Date;
+  public updatedAt?: Date;
+}
+
 Note.init(
   {
     id: {
@@ -12,10 +19,6 @@ Note.init(
     },
     userId: {
       allowNull: false,
-      references: {
-        key: "id",
-        model: "users",
-      },
       type: DataTypes.UUID,
     },
     desc: {

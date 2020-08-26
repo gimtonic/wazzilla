@@ -8,11 +8,22 @@ const typeDefs = gql`
     email: String!
   }
 
+  type Note {
+    id: ID!
+    userId: ID!
+    desc: String!
+    hashLink: String
+    createdAt: Date!
+    updatedAt: Date
+  }
+
   type Mutation {
     registerUser(email: String!, password: String!): User!
+    createNote(desc: String!): Note!
   }
+
   type Query {
-    userSession: User!
+    getNotes: [Note!]!
   }
 `;
 

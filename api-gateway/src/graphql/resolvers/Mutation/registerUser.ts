@@ -1,9 +1,7 @@
-// @ts-ignore
-import UsersService from "@src/adapters/usersService";
-// @ts-ignore
-import { User } from "@src/types";
+import UsersService from "@adapters/usersService";
+import { IUser } from "@types";
 
-const registerUserResolver = async (obj: any, user: User) => {
+const registerUserResolver = async (obj: any, user: IUser) => {
   return await UsersService.registerUser(user);
 };
 

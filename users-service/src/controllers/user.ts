@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from "express";
+import * as UserService from "@services/user";
 
-export function getUsers(
+export async function registerUser(
   req: Request,
   res: Response,
   next: NextFunction
-): Response | void {
+): Promise<void | Response<any>> {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return next(new Error("Invalid body"));
+  }
   try {
-    const user = {
-      id: 1,
-      createdAt: "2020-02-12",
-      expiresAt: "2020-02-12",
-    };
+    const user = await UserService.registerUser(req);
 
     return res.json(user);
   } catch (e) {

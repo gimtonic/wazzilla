@@ -1,8 +1,11 @@
 import { DataTypes, Model } from "sequelize";
-
 import sequelize from "./connection";
 
-export class User extends Model {}
+export default class User extends Model {
+  public id!: Number;
+  public email!: String;
+}
+
 User.init(
   {
     id: {
@@ -22,9 +25,11 @@ User.init(
   },
   {
     defaultScope: {
+      // @ts-ignore
       rawAttributes: { exclude: ["passwordHash"] },
     },
     modelName: "users",
+    timestamps: false,
     sequelize,
   }
 );

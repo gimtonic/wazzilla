@@ -2,11 +2,8 @@ import { ApolloServer } from "apollo-server-express";
 import cors from "cors";
 import express from "express";
 
-// @ts-ignore
-import resolvers from "@src/graphql/resolvers";
-// @ts-ignore
-import typeDefs from "@src/graphql/typeDefs";
-
+import resolvers from "@graphql/resolvers";
+import typeDefs from "@graphql/typeDefs";
 import formatGraphQlErrors from "./formatGraphQLErrors";
 
 const PORT = Number(process.env.PORT);

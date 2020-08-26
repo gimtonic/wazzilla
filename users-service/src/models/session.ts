@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 
 import sequelize from "./connection";
 
-export class Session extends Model {}
+export default class Session extends Model {}
 Session.init(
   {
     id: {

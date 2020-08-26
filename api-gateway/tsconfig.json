@@ -9,7 +9,10 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@src": ["./src"]
+      "@adapters/*": ["./src/adapters/*"],
+      "@server/*": ["./src/server/*"],
+      "@graphql/*": ["./src/graphql/*"],
+      "@types": ["./src/types"]
     }
   },
   "include": ["./src/**/*", "jest.config.js"]

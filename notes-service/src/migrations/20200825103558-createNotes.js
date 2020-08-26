@@ -12,10 +12,6 @@ module.exports = {
         },
         userId: {
           allowNull: false,
-          references: {
-            key: "id",
-            model: "users",
-          },
           type: Sequelize.UUID,
         },
         desc: {

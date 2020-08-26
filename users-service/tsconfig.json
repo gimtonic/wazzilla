@@ -9,7 +9,11 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
-      "@controllers": ["./src/controllers"]
+      "@controllers/*": ["./src/controllers/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@services/*": ["./src/services/*"],
+      "@models/*": ["./src/models/*"],
+      "@types": ["./src/types"]
     }
   },
   "include": ["./src/**/*", "jest.config.js", "sequelize.config.js"]
