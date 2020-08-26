@@ -17,13 +17,21 @@ const typeDefs = gql`
     updatedAt: Date
   }
 
+  type NoteDelete {
+    message: String!
+  }
+
   type Mutation {
     registerUser(email: String!, password: String!): User!
     createNote(desc: String!): Note!
+    editNote(id: ID!, desc: String!): Note!
+    deleteNote(id: ID!): NoteDelete!
+    shareNote(id: ID!): Note!
   }
 
   type Query {
     getNotes: [Note!]!
+    getNoteByHashLink(hashLink: String!): Note
   }
 `;
 

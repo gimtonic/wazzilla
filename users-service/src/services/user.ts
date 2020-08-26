@@ -7,13 +7,11 @@ import { IUser } from "@types";
 export async function registerUser(req: Request): Promise<IUser> {
   const { email, password } = req.body;
   try {
-    const user = await User.create({
+    return await User.create({
       email,
       id: generateUUID(),
       passwordHash: hashPassword(password),
     });
-
-    return user;
   } catch (e) {
     throw Error(e);
   }
