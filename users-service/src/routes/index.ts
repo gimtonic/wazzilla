@@ -3,7 +3,8 @@ import * as SessionController from "@controllers/session";
 import { Application } from "express";
 
 const setupRoutes = (app: Application) => {
-  app.get("/sessions", SessionController.getSessions);
+  app.post("/sessions", SessionController.createSession);
+  app.delete("/delete/:userSessionId", SessionController.deleteSessions);
   app.post("/register", UserController.registerUser);
 };
 

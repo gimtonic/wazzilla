@@ -23,6 +23,7 @@ services:
     environment:
       DB_URI: ${USERS_DB_URI}
       PORT: ${USERS_SERVICE_PORT}
+      USER_SESSION_EXPIRY_HOURS: ${USER_SESSION_EXPIRY_HOURS}
     volumes:
       - ./users-service:/opt/app
     ports:

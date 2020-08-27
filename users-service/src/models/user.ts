@@ -4,6 +4,7 @@ import sequelize from "./connection";
 export default class User extends Model {
   public id!: Number;
   public email!: String;
+  public passwordHash!: String;
 }
 
 User.init(

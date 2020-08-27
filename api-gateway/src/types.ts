@@ -1,6 +1,7 @@
 export interface IUser {
-  id: Number;
+  id?: Number;
   email: String;
+  password: String;
 }
 
 export interface INoteCreate {
@@ -14,4 +15,10 @@ export interface INote {
   userId: Number;
   desc: String;
   hashLink: String;
+}
+
+export interface IUserSession {
+  id: Number;
+  expiresAt: Date;
+  user: IUser;
 }

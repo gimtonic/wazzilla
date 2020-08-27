@@ -1,4 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
+//@ts-ignore
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
@@ -9,13 +11,15 @@ import formatGraphQlErrors from "./formatGraphQLErrors";
 const PORT = Number(process.env.PORT);
 
 const apolloServer = new ApolloServer({
-  context: (a) => a,
+  context: (req) => req,
   formatError: formatGraphQlErrors,
   resolvers,
   typeDefs,
 });
 
 const app = express();
+
+app.use(cookieParser());
 
 app.use(
   cors({

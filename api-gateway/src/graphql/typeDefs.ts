@@ -21,12 +21,24 @@ const typeDefs = gql`
     message: String!
   }
 
+  type UserSession {
+    id: ID!
+    expiresAt: Date!
+    user: User!
+  }
+
+  type UserSessionDelete {
+    message: String!
+  }
+
   type Mutation {
     registerUser(email: String!, password: String!): User!
+    loginUser(email: String!, password: String!): UserSession!
     createNote(desc: String!): Note!
     editNote(id: ID!, desc: String!): Note!
     deleteNote(id: ID!): NoteDelete!
     shareNote(id: ID!): Note!
+    logoutUser: UserSessionDelete!
   }
 
   type Query {

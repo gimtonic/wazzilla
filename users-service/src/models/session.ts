@@ -2,7 +2,11 @@ import { DataTypes, Model } from "sequelize";
 
 import sequelize from "./connection";
 
-export default class Session extends Model {}
+export default class Session extends Model {
+  public id!: Number;
+  public userId!: Number;
+  public expiresAt!: Date;
+}
 Session.init(
   {
     id: {
@@ -27,6 +31,6 @@ Session.init(
     modelName: "sessions",
     paranoid: false,
     sequelize,
-    updatedAt: false,
+    timestamps: false,
   }
 );
