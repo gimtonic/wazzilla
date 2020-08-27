@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import * as NoteService from "@services/note";
+import validate from "@helpers/validate";
 
 export async function createNote(
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void | Response> {
-  const { desc } = req.body;
-  if (!desc) {
-    return next(new Error("Invalid body"));
-  }
+  validate(req, res);
+
   try {
     const note = await NoteService.createNote(req);
 
@@ -38,6 +37,7 @@ export async function editNote(
   res: Response,
   next: NextFunction
 ): Promise<void | Response> {
+  validate(req, res);
   try {
     const { id } = req.params;
     const { desc } = req.body;
@@ -57,6 +57,7 @@ export async function deleteNote(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
+  validate(req, res);
   try {
     const { id } = req.params;
 
@@ -75,6 +76,7 @@ export async function shareNote(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
+  validate(req, res);
   try {
     const { id } = req.params;
 
@@ -93,6 +95,7 @@ export async function getNoteByHashLink(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
+  validate(req, res);
   try {
     const { hashLink } = req.params;
 

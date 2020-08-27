@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.15.0",
     "express": "^4.17.1",
+    "express-validator": "^6.6.1",
     "module-alias": "^2.2.2",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.4",
@@ -38,6 +39,7 @@
     "@services": "./src/services",
     "@models": "./src/models",
     "@helpers": "./src/helpers",
+    "@validators": "./src/validators",
     "@types": "./src/types"
   }
 }

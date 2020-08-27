@@ -13,6 +13,7 @@
       "@helpers/*": ["./src/helpers/*"],
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
+      "@validators/*": ["./src/validators/*"],
       "@types": ["./src/types"]
     }
   },
