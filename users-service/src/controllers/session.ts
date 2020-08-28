@@ -35,15 +35,34 @@ export async function deleteSessions(
 ) {
   const { userSessionId } = req.params;
   try {
-    const user = await SessionService.getUserBySessionId(userSessionId);
+    const session = await SessionService.getSession(userSessionId);
 
-    if (!user) return next(new Error("Неверные данные"));
+    if (!session) return next(new Error("Неверные данные"));
 
-    await SessionService.deleteAllSessionsByUser(user.id);
+    await SessionService.deleteAllSessionsByUser(session.userId);
 
     return res.json({
       message: "Сессии успешно удалены",
     });
+  } catch (e) {
+    return next(e);
+  }
+}
+
+export async function getUserBySession(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const { userSessionId } = req.params;
+  try {
+    const session = await SessionService.getSession(userSessionId);
+
+    if (!session) return next(new Error("Неверные данные"));
+
+    const user = await UserService.getUserById(session.userId);
+
+    return res.json(user);
   } catch (e) {
     return next(e);
   }

@@ -19,7 +19,7 @@ export async function createSession(id: Number): Promise<IUserSession> {
   }
 }
 
-export async function getUserBySessionId(
+export async function getSession(
   userSessionId: String
 ): Promise<IUserSession | null> {
   try {

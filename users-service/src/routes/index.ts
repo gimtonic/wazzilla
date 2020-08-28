@@ -11,6 +11,7 @@ const setupRoutes = (app: Application) => {
     SessionController.createSession
   );
   app.delete("/delete/:userSessionId", SessionController.deleteSessions);
+  app.get("/get/:userSessionId", SessionController.getUserBySession);
   app.post(
     "/register",
     UserValidator.registerUser,

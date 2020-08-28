@@ -24,3 +24,11 @@ export async function findUserByEmail(email: String): Promise<IUser | null> {
     throw Error(e);
   }
 }
+
+export async function getUserById(id: Number): Promise<IUser | null> {
+  try {
+    return await User.findOne({ where: { id: String(id) } });
+  } catch (e) {
+    throw Error(e);
+  }
+}

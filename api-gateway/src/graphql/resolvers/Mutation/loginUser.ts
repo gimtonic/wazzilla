@@ -1,9 +1,9 @@
 import UsersService from "@adapters/usersService";
-import { IUser, IUserSession } from "@types";
+import { IUserCreateSession, IUserSession } from "@types";
 
 const loginUserResolver = async (
   obj: any,
-  { email, password }: IUser,
+  { email, password }: IUserCreateSession,
   context: any
 ) => {
   const userSession = (await UsersService.createUserSession({

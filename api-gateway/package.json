@@ -33,6 +33,7 @@
     "@adapters": "./src/adapters",
     "@server": "./src/server",
     "@graphql": "./src/graphql",
+    "@helpers": "./src/helpers",
     "@types": "./src/types"
   }
 }

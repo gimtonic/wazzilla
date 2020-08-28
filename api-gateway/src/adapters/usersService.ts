@@ -1,5 +1,5 @@
 import got from "got";
-import { IUser } from "@types";
+import { IUser, IUserCreateSession } from "@types";
 const { USERS_SERVICE_URI } = process.env;
 
 export default class UsersService {
@@ -8,7 +8,7 @@ export default class UsersService {
       .post(`${USERS_SERVICE_URI}/register`, { json: user })
       .json();
   }
-  static async createUserSession({ email, password }: IUser) {
+  static async createUserSession({ email, password }: IUserCreateSession) {
     const body = await got
       .post(`${USERS_SERVICE_URI}/sessions`, { json: { email, password } })
       .json();
@@ -17,6 +17,12 @@ export default class UsersService {
   static async deleteUserSession(userSessionId: String) {
     const body = await got
       .delete(`${USERS_SERVICE_URI}/delete/${userSessionId}`)
+      .json();
+    return body;
+  }
+  static async getUserBySession(userSessionId: String) {
+    const body = await got
+      .get(`${USERS_SERVICE_URI}/get/${userSessionId}`)
       .json();
     return body;
   }

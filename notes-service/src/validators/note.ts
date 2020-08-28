@@ -12,31 +12,13 @@ export const createNote = [
 ];
 
 export const editNote = [
-  param("id").custom(async (value) => {
-    const note = await getNote(value);
-    if (!note) throw new Error("Нет такой заметки");
-  }),
   check("desc")
-    .isLength({ max: 1000 })
+    .isLength({ max: 4 })
     .withMessage("Не должно быть больше 1000")
     .isString()
     .withMessage("Должно быть строкой")
     .notEmpty()
     .withMessage("Не должна равнятся нулю"),
-];
-
-export const deleteNote = [
-  param("id").custom(async (value) => {
-    const note = await getNote(value);
-    if (!note) throw new Error("Нет такой заметки");
-  }),
-];
-
-export const shareNote = [
-  param("id").custom(async (value) => {
-    const note = await getNote(value);
-    if (!note) throw new Error("Нет такой заметки");
-  }),
 ];
 
 export const getNoteByHashLink = [

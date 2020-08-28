@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import * as NoteService from "@services/note";
 import validate from "@helpers/validate";
+import checkUserPermission from "@helpers/checkUserPermission";
 
 export async function createNote(
   req: Request,
@@ -37,14 +38,12 @@ export async function editNote(
   res: Response,
   next: NextFunction
 ): Promise<void | Response> {
-  validate(req, res);
   try {
-    const { id } = req.params;
-    const { desc } = req.body;
+    validate(req, res);
+    await checkUserPermission(req);
+    await NoteService.editNote(req);
 
-    await NoteService.editNote(id, desc);
-
-    const note = await NoteService.getNote(id);
+    const note = await NoteService.getNote(req);
 
     return res.json(note);
   } catch (e) {
@@ -57,12 +56,9 @@ export async function deleteNote(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
-  validate(req, res);
   try {
-    const { id } = req.params;
-
-    await NoteService.deleteNode(id);
-
+    await checkUserPermission(req);
+    await NoteService.deleteNode(req);
     return res.json({
       message: "Запись успешно удалена",
     });
@@ -76,13 +72,11 @@ export async function shareNote(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
-  validate(req, res);
   try {
-    const { id } = req.params;
+    await checkUserPermission(req);
+    await NoteService.shareNote(req);
 
-    await NoteService.shareNote(id);
-
-    const note = await NoteService.getNote(id);
+    const note = await NoteService.getNote(req);
 
     return res.json(note);
   } catch (e) {

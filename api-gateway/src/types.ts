@@ -1,5 +1,10 @@
 export interface IUser {
-  id?: Number;
+  id: Number;
+  email: String;
+  password: String;
+}
+
+export interface IUserCreateSession {
   email: String;
   password: String;
 }

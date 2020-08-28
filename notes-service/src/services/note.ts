@@ -4,12 +4,12 @@ import generateUUID from "@helpers/generateUUID";
 import { INote } from "@types";
 
 export async function createNote(req: Request): Promise<INote> {
-  const { desc } = req.body;
   try {
+    const { desc, userId } = req.body;
     return await Note.create({
       desc,
       id: generateUUID(),
-      userId: 23,
+      userId,
     });
   } catch (e) {
     throw Error(e);
@@ -24,11 +24,14 @@ export async function getNotes(): Promise<INote[]> {
   }
 }
 
-export async function getNote(id: String): Promise<INote | null> {
+export async function getNote(req: Request): Promise<INote | null> {
   try {
+    const { userId } = req.body;
+    const { id } = req.params;
     return await Note.findOne({
       where: {
         id: String(id),
+        userId: String(userId),
       },
     });
   } catch (e) {
@@ -36,8 +39,10 @@ export async function getNote(id: String): Promise<INote | null> {
   }
 }
 
-export async function editNote(id: String, desc: String): Promise<void> {
+export async function editNote(req: Request): Promise<void> {
   try {
+    const { userId, desc } = req.body;
+    const { id } = req.params;
     await Note.update(
       {
         desc,
@@ -45,6 +50,7 @@ export async function editNote(id: String, desc: String): Promise<void> {
       {
         where: {
           id: String(id),
+          userId,
         },
       }
     );
@@ -53,11 +59,14 @@ export async function editNote(id: String, desc: String): Promise<void> {
   }
 }
 
-export async function deleteNode(id: String): Promise<void> {
+export async function deleteNode(req: Request): Promise<void> {
   try {
+    const { id } = req.params;
+    const { userId } = req.body;
     await Note.destroy({
       where: {
         id: String(id),
+        userId,
       },
     });
   } catch (e) {
@@ -65,8 +74,10 @@ export async function deleteNode(id: String): Promise<void> {
   }
 }
 
-export async function shareNote(id: String): Promise<void> {
+export async function shareNote(req: Request): Promise<void> {
   try {
+    const { id } = req.params;
+    const { userId } = req.body;
     await Note.update(
       {
         hashLink: generateUUID(),
@@ -74,6 +85,7 @@ export async function shareNote(id: String): Promise<void> {
       {
         where: {
           id: String(id),
+          userId,
         },
       }
     );
