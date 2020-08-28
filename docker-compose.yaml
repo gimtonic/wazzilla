@@ -46,6 +46,7 @@ services:
     environment:
       DB_URI: ${NOTES_DB_URI}
       PORT: ${NOTES_SERVICE_PORT}
+      LIMIT_NOTES_FOR_PAGE: ${LIMIT_NOTES_FOR_PAGE}
     ports:
       - "${NOTES_SERVICE_PORT}:${NOTES_SERVICE_PORT}"
     volumes:

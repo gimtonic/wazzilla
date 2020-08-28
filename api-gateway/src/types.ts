@@ -27,3 +27,7 @@ export interface IUserSession {
   expiresAt: Date;
   user: IUser;
 }
+
+export interface INoteGet {
+  page: Number;
+}

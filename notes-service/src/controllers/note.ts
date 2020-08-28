@@ -25,9 +25,26 @@ export async function getNotes(
   next: NextFunction
 ): Promise<void | Response> {
   try {
-    const notes = await NoteService.getNotes();
+    validate(req, res);
+    const { LIMIT_NOTES_FOR_PAGE } = process.env;
+    let page = Number(req.body.page);
+    const notesCount = await NoteService.getNotesCount(req);
+    const totalPages = Math.ceil(
+      Number(notesCount) / Number(LIMIT_NOTES_FOR_PAGE)
+    );
 
-    return res.json(notes);
+    let nextPage = 0;
+    if (totalPages > page) {
+      nextPage = ++page;
+    }
+
+    const notes = await NoteService.getNotes(req);
+
+    return res.json({
+      totalPages,
+      nextPage,
+      notes,
+    });
   } catch (e) {
     return next(e);
   }

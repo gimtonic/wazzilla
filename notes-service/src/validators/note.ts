@@ -1,4 +1,4 @@
-import { check, param } from "express-validator";
+import { check, param, sanitize } from "express-validator";
 import { getNote, getNoteByHashLink as getNoteByLink } from "@services/note";
 
 export const createNote = [
@@ -26,4 +26,12 @@ export const getNoteByHashLink = [
     const note = await getNoteByLink(value);
     if (!note) throw new Error("Нет такой заметки");
   }),
+];
+
+export const getNotes = [
+  check("page")
+    .isNumeric()
+    .withMessage("Должно быть числом")
+    .notEmpty()
+    .withMessage("Не должна равнятся нулю"),
 ];

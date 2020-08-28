@@ -7,8 +7,10 @@ export default class NotesService {
       .post(`${NOTES_SERVICE_URI}/create`, { json: { desc, userId } })
       .json();
   }
-  static async getNotes() {
-    return await got.get(`${NOTES_SERVICE_URI}/get`).json();
+  static async getNotes(page: Number, userId: Number) {
+    return await got
+      .post(`${NOTES_SERVICE_URI}/get`, { json: { page, userId } })
+      .json();
   }
   static async editNote(id: Number, desc: String, userId: Number) {
     return await got

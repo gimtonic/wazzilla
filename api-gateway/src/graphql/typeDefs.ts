@@ -8,6 +8,12 @@ const typeDefs = gql`
     email: String!
   }
 
+  type Notes {
+    totalPages: Int!
+    nextPage: Int!
+    notes: [Note]
+  }
+
   type Note {
     id: ID!
     userId: ID!
@@ -42,7 +48,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getNotes: [Note!]!
+    getNotes(page: Int!): Notes!
     getNoteByHashLink(hashLink: String!): Note
   }
 `;

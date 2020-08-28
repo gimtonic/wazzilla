@@ -16,9 +16,30 @@ export async function createNote(req: Request): Promise<INote> {
   }
 }
 
-export async function getNotes(): Promise<INote[]> {
+export async function getNotes(req: Request): Promise<INote[]> {
   try {
-    return await Note.findAll();
+    const { userId, page } = req.body;
+    const { LIMIT_NOTES_FOR_PAGE } = process.env;
+    return await Note.findAll({
+      where: {
+        userId: String(userId),
+      },
+      limit: Number(LIMIT_NOTES_FOR_PAGE),
+      offset: Number(page - 1) * Number(LIMIT_NOTES_FOR_PAGE),
+    });
+  } catch (e) {
+    throw Error(e);
+  }
+}
+
+export async function getNotesCount(req: Request): Promise<Number> {
+  try {
+    const { userId } = req.body;
+    return await Note.count({
+      where: {
+        userId: String(userId),
+      },
+    });
   } catch (e) {
     throw Error(e);
   }

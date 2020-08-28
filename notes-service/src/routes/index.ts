@@ -4,7 +4,7 @@ import * as NoteValidator from "@validators/note";
 
 const setupRoutes = (app: Application) => {
   app.post("/create", NoteValidator.createNote, NoteController.createNote);
-  app.get("/get", NoteController.getNotes);
+  app.post("/get", NoteValidator.getNotes, NoteController.getNotes);
   app.post("/edit/:id", NoteValidator.editNote, NoteController.editNote);
   app.post("/delete/:id", NoteController.deleteNote);
   app.post("/share/:id", NoteController.shareNote);
