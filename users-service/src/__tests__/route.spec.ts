@@ -8,10 +8,16 @@ import {
   getUserBySession,
   deleteSessions,
 } from "@helpers/testHelpers";
+
+let userResponse: any;
+const user = userFactory();
+
 describe("test routes", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await sequelize.drop();
     await sequelize.sync();
+
+    userResponse = await registerUser(user);
   });
 
   afterAll(async () => {
@@ -21,9 +27,6 @@ describe("test routes", () => {
   });
 
   it("success register user", async () => {
-    const user = userFactory();
-    const userResponse = await registerUser(user);
-
     const {
       body,
       body: { email },
@@ -35,8 +38,6 @@ describe("test routes", () => {
   });
 
   it("success login user", async () => {
-    const user = userFactory();
-    const userResponse = await registerUser(user);
     const sessionResponse = await createSession(user);
 
     const {
@@ -51,8 +52,6 @@ describe("test routes", () => {
   });
 
   it("success get user by session", async () => {
-    const user = userFactory();
-    const userResponse = await registerUser(user);
     const {
       id: expectId,
       email: expectEmail,
@@ -70,8 +69,6 @@ describe("test routes", () => {
   });
 
   it("success delete all session", async () => {
-    const user = userFactory();
-    await registerUser(user);
     const sessionResponse = await createSession(user);
     const { id: sessionId } = sessionResponse.body;
     const sessionBefore = await SessionService.getSession(sessionId);

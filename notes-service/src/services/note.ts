@@ -12,6 +12,7 @@ export async function createNote(req: Request): Promise<INote> {
       userId,
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -28,6 +29,7 @@ export async function getNotes(req: Request): Promise<INote[]> {
       offset: Number(page - 1) * Number(LIMIT_NOTES_FOR_PAGE),
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -41,6 +43,7 @@ export async function getNotesCount(req: Request): Promise<Number> {
       },
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -56,6 +59,7 @@ export async function getNote(req: Request): Promise<INote | null> {
       },
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -76,6 +80,7 @@ export async function editNote(req: Request): Promise<void> {
       }
     );
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -91,6 +96,7 @@ export async function deleteNode(req: Request): Promise<void> {
       },
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -111,6 +117,7 @@ export async function shareNote(req: Request): Promise<void> {
       }
     );
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -125,6 +132,7 @@ export async function getNoteByHashLink(
       },
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }

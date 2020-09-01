@@ -3,11 +3,19 @@ import * as UserService from "@services/user";
 import server from "../..";
 import userFactory from "@factories/user";
 import { Request } from "express";
+import { IUser } from "@types";
+
+let user: IUser;
+const request = {
+  body: userFactory(),
+};
 
 describe("User Service", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await sequelize.drop();
     await sequelize.sync();
+
+    user = await UserService.registerUser(request as Request);
   });
 
   afterAll(async () => {
@@ -17,23 +25,12 @@ describe("User Service", () => {
   });
 
   it("create user", async () => {
-    const request = {
-      body: userFactory(),
-    };
-
-    const user = await UserService.registerUser(request as Request);
-
     expect(user.email).toEqual(request.body.email);
     expect(user).toHaveProperty("id");
     expect(user).toHaveProperty("passwordHash");
   });
 
   it("find user by email", async () => {
-    const request = {
-      body: userFactory(),
-    };
-
-    const user = await UserService.registerUser(request as Request);
     const findUser = await UserService.findUserByEmail(user.email);
 
     expect(user.id).toEqual(findUser!.id);
@@ -42,11 +39,6 @@ describe("User Service", () => {
   });
 
   it("find user by id", async () => {
-    const request = {
-      body: userFactory(),
-    };
-
-    const user = await UserService.registerUser(request as Request);
     const findUser = await UserService.getUserById(user.id);
 
     expect(user.id).toEqual(findUser!.id);

@@ -8,13 +8,13 @@ export async function createNote(
   res: Response,
   next: NextFunction
 ): Promise<void | Response> {
-  validate(req, res);
-
   try {
+    validate(req, res);
     const note = await NoteService.createNote(req);
 
     return res.json(note);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -46,6 +46,7 @@ export async function getNotes(
       notes,
     });
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -64,6 +65,7 @@ export async function editNote(
 
     return res.json(note);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -80,6 +82,7 @@ export async function deleteNote(
       message: "Запись успешно удалена",
     });
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -97,6 +100,7 @@ export async function shareNote(
 
     return res.json(note);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -106,14 +110,15 @@ export async function getNoteByHashLink(
   res: Response,
   next: NextFunction
 ): Promise<Response | void> {
-  validate(req, res);
   try {
+    validate(req, res);
     const { hashLink } = req.params;
 
     const note = await NoteService.getNoteByHashLink(hashLink);
 
     return res.json(note);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }

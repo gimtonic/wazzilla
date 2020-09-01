@@ -7,8 +7,7 @@
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",
     "watch": "nodemon --exec ts-node src/index.ts",
-    "test": "NODE_ENV=test jest --runInBand",
-    "coverage": "jest --coverage"
+    "test": "NODE_ENV=test jest --coverage --runInBand"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

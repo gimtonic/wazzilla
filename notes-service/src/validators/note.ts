@@ -1,5 +1,5 @@
-import { check, param, sanitize } from "express-validator";
-import { getNote, getNoteByHashLink as getNoteByLink } from "@services/note";
+import { check, param } from "express-validator";
+import { getNoteByHashLink as getNoteByLink } from "@services/note";
 
 export const createNote = [
   check("desc")
@@ -13,7 +13,7 @@ export const createNote = [
 
 export const editNote = [
   check("desc")
-    .isLength({ max: 4 })
+    .isLength({ max: 1000 })
     .withMessage("Не должно быть больше 1000")
     .isString()
     .withMessage("Должно быть строкой")
@@ -31,7 +31,7 @@ export const getNoteByHashLink = [
 export const getNotes = [
   check("page")
     .isNumeric()
-    .withMessage("Должно быть числом")
-    .notEmpty()
-    .withMessage("Не должна равнятся нулю"),
+    .custom(async (value) => {
+      if (value <= 0) throw new Error("Должно быть положительное число");
+    }),
 ];
