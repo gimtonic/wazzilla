@@ -1,2 +1,2 @@
 import "module-alias/register";
-import "@server/startServer";
+import "@server";

@@ -8,8 +8,6 @@ import resolvers from "@graphql/resolvers";
 import typeDefs from "@graphql/typeDefs";
 import formatGraphQlErrors from "./formatGraphQLErrors";
 
-const PORT = Number(process.env.PORT);
-
 const apolloServer = new ApolloServer({
   context: (req) => req,
   formatError: formatGraphQlErrors,
@@ -30,6 +28,4 @@ app.use(
 
 apolloServer.applyMiddleware({ app, cors: false, path: "/graphql" });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.info(`API gateway listening on ${PORT}`);
-});
+export { app };

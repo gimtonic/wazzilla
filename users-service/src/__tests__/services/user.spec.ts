@@ -30,6 +30,13 @@ describe("User Service", () => {
     expect(user).toHaveProperty("passwordHash");
   });
 
+  it("delete user", async () => {
+    await UserService.deleteUser(user.id);
+
+    const responseUser = await UserService.getUserById(user.id);
+    expect(responseUser).toBeNull();
+  });
+
   it("find user by email", async () => {
     const findUser = await UserService.findUserByEmail(user.email);
 

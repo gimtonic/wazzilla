@@ -4,6 +4,11 @@ export interface IUser {
   password: String;
 }
 
+export interface IUserCreate {
+  email: String;
+  password: String;
+}
+
 export interface IUserCreateSession {
   email: String;
   password: String;
@@ -22,12 +27,26 @@ export interface INote {
   hashLink: String;
 }
 
+export interface INotes {
+  totalPages: Number;
+  nextPage: Number;
+  notes: INote[];
+}
+
 export interface IUserSession {
-  id: Number;
+  id: String;
   expiresAt: Date;
-  user: IUser;
+  userId: String;
 }
 
 export interface INoteGet {
   page: Number;
+}
+
+export interface INoteDelete {
+  message: String;
+}
+
+export interface IUserDelete {
+  message: String;
 }

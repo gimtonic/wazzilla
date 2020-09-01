@@ -5,14 +5,14 @@
   "license": "MIT",
   "scripts": {
     "watch": "nodemon --exec ts-node src/index.ts",
-    "test": "jest --watch",
-    "coverage": "jest --coverage"
+    "test": "NODE_ENV=test jest --coverage --runInBand"
   },
   "dependencies": {
     "apollo-server": "^2.16.1",
     "apollo-server-express": "^2.16.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "got": "^11.5.2",
     "lodash": "^4.17.20",

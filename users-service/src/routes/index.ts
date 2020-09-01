@@ -17,6 +17,7 @@ const setupRoutes = (app: Application) => {
     UserValidator.registerUser,
     UserController.registerUser
   );
+  app.delete("/delete-user/:userSessionId", UserController.deleteUser);
 };
 
 export default setupRoutes;

@@ -18,6 +18,15 @@ export async function registerUser(req: Request): Promise<IUser> {
   }
 }
 
+export async function deleteUser(userId: Number): Promise<void> {
+  try {
+    await User.destroy({ where: { id: String(userId) } });
+  } catch (e) {
+    /* istanbul ignore next */
+    throw Error(e);
+  }
+}
+
 export async function findUserByEmail(email: String): Promise<IUser | null> {
   try {
     return await User.findOne({ where: { email: String(email) } });

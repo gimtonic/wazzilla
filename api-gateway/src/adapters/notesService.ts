@@ -1,5 +1,10 @@
 import got from "got";
-const { NOTES_SERVICE_URI } = process.env;
+let { NOTES_SERVICE_URI, NOTES_SERVICE_PORT } = process.env;
+
+/* istanbul ignore else */
+if (process.env.NODE_ENV === "test") {
+  NOTES_SERVICE_URI = `http://127.0.0.1:${NOTES_SERVICE_PORT}`;
+}
 
 export default class NotesService {
   static async createNote(desc: String, userId: Number) {

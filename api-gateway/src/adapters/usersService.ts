@@ -1,11 +1,22 @@
 import got from "got";
-import { IUser, IUserCreateSession } from "@types";
-const { USERS_SERVICE_URI } = process.env;
+import { IUserCreate, IUserCreateSession } from "@types";
+
+let { USERS_SERVICE_URI, USERS_SERVICE_PORT } = process.env;
+
+/* istanbul ignore else */
+if (process.env.NODE_ENV === "test") {
+  USERS_SERVICE_URI = `http://127.0.0.1:${USERS_SERVICE_PORT}`;
+}
 
 export default class UsersService {
-  static async registerUser(user: IUser) {
+  static async registerUser(user: IUserCreate) {
     return await got
       .post(`${USERS_SERVICE_URI}/register`, { json: user })
+      .json();
+  }
+  static async deleteUser(userSessionId: String) {
+    return await got
+      .delete(`${USERS_SERVICE_URI}/delete-user/${userSessionId}`)
       .json();
   }
   static async createUserSession({ email, password }: IUserCreateSession) {
@@ -14,6 +25,7 @@ export default class UsersService {
       .json();
     return body;
   }
+  /* istanbul ignore next */
   static async deleteUserSession(userSessionId: String) {
     const body = await got
       .delete(`${USERS_SERVICE_URI}/delete/${userSessionId}`)
