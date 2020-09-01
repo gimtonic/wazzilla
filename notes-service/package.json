@@ -7,12 +7,13 @@
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",
     "watch": "nodemon --exec ts-node src/index.ts",
-    "test": "jest --watch",
+    "test": "NODE_ENV=test jest --runInBand",
     "coverage": "jest --coverage"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "module-alias": "^2.2.2",
@@ -26,8 +27,10 @@
     "@types/express-serve-static-core": "^4.17.9",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
+    "faker": "^5.1.0",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
     "ts-jest": "^26.2.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"

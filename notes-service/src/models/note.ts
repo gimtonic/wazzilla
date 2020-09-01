@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "./connection";
+import sequelize from "./connectorInit";
 
 export default class Note extends Model {
   public id!: Number;

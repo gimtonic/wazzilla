@@ -7,12 +7,13 @@ export async function registerUser(
   res: Response,
   next: NextFunction
 ): Promise<void | Response<any>> {
-  validate(req, res);
   try {
+    validate(req, res);
     const user = await UserService.registerUser(req);
 
     return res.json(user);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }

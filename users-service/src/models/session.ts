@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
-
-import sequelize from "./connection";
+import sequelize from "./connectorInit";
 
 export default class Session extends Model {
   public id!: Number;

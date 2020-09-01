@@ -9,9 +9,9 @@ export async function createSession(
   res: Response,
   next: NextFunction
 ) {
-  validate(req, res);
-  const { email, password } = req.body;
   try {
+    validate(req, res);
+    const { email, password } = req.body;
     const user = await UserService.findUserByEmail(email);
 
     if (!user) return next(new Error("Неверные данные"));
@@ -24,6 +24,7 @@ export async function createSession(
 
     return res.json(session);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -33,8 +34,8 @@ export async function deleteSessions(
   res: Response,
   next: NextFunction
 ) {
-  const { userSessionId } = req.params;
   try {
+    const { userSessionId } = req.params;
     const session = await SessionService.getSession(userSessionId);
 
     if (!session) return next(new Error("Неверные данные"));
@@ -45,6 +46,7 @@ export async function deleteSessions(
       message: "Сессии успешно удалены",
     });
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }
@@ -54,8 +56,8 @@ export async function getUserBySession(
   res: Response,
   next: NextFunction
 ) {
-  const { userSessionId } = req.params;
   try {
+    const { userSessionId } = req.params;
     const session = await SessionService.getSession(userSessionId);
 
     if (!session) return next(new Error("Неверные данные"));
@@ -64,6 +66,7 @@ export async function getUserBySession(
 
     return res.json(user);
   } catch (e) {
+    /* istanbul ignore next */
     return next(e);
   }
 }

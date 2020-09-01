@@ -15,6 +15,7 @@ export async function createSession(id: Number): Promise<IUserSession> {
       expiresAt,
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -25,6 +26,7 @@ export async function getSession(
   try {
     return await Session.findOne({ where: { id: String(userSessionId) } });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -37,6 +39,7 @@ export async function deleteAllSessionsByUser(userId: Number): Promise<void> {
       },
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }

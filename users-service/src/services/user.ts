@@ -13,6 +13,7 @@ export async function registerUser(req: Request): Promise<IUser> {
       passwordHash: hashPassword(password),
     });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -21,6 +22,7 @@ export async function findUserByEmail(email: String): Promise<IUser | null> {
   try {
     return await User.findOne({ where: { email: String(email) } });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }
@@ -29,6 +31,7 @@ export async function getUserById(id: Number): Promise<IUser | null> {
   try {
     return await User.findOne({ where: { id: String(id) } });
   } catch (e) {
+    /* istanbul ignore next */
     throw Error(e);
   }
 }

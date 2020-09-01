@@ -14,8 +14,9 @@
       "@services/*": ["./src/services/*"],
       "@models/*": ["./src/models/*"],
       "@validators/*": ["./src/validators/*"],
+      "@factories/*": ["./src/factories/*"],
       "@types": ["./src/types"]
     }
   },
-  "include": ["./src/**/*", "jest.config.js", "sequelize.config.js"]
+  "include": ["./src/**/*", "../setup.ts"]
 }

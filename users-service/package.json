@@ -7,14 +7,14 @@
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",
     "watch": "nodemon --exec ts-node src/index.ts",
-    "test": "jest --watch",
-    "coverage": "jest --coverage"
+    "test": "NODE_ENV=test jest --coverage --runInBand"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "date-fns": "^2.15.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "module-alias": "^2.2.2",
@@ -28,9 +28,11 @@
     "@types/express-serve-static-core": "^4.17.9",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
+    "faker": "^5.1.0",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
-    "ts-jest": "^26.2.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
@@ -40,6 +42,7 @@
     "@models": "./src/models",
     "@helpers": "./src/helpers",
     "@validators": "./src/validators",
+    "@factories": "./src/factories",
     "@types": "./src/types"
   }
 }
